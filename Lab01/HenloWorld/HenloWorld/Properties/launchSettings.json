@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "HenloWorld": {
+      "commandName": "Project",
+      "commandLineArgs": "https://www.pja.edu.pl"
+    }
+  }
+}

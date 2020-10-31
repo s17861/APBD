@@ -23,6 +23,10 @@ namespace HenloWorld
                     Console.WriteLine(match);
                 }
             }
+            else
+            {
+                Console.WriteLine(response.StatusCode);
+            }
         }
     }
 }
