@@ -10,7 +10,7 @@ namespace HenloWorld
         public static async Task Main(string[] args)
         {
             var client = new HttpClient();
-            var response = await client.GetAsync("https://www.pja.edu.pl"/*args[0]*/);
+            var response = await client.GetAsync(args[0]);
 
             if(response.IsSuccessStatusCode)
             {
