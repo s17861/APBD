@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "CSV_to_XML": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\dev\\APBD\\Lab02\\CSV_to_XML\\CSV_to_XML\\input.csv D:\\dev\\APBD\\Lab02\\CSV_to_XML\\CSV_to_XML\\output.xml xml"
+    },
+    "CSV_to_JSON": {
+      "commandName": "Project",
+      "commandLineArgs": "D:\\dev\\APBD\\Lab02\\CSV_to_XML\\CSV_to_XML\\input.csv D:\\dev\\APBD\\Lab02\\CSV_to_XML\\CSV_to_XML\\output.json json"
+    }
+  }
+}
