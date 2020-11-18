@@ -19,7 +19,7 @@ namespace CSV_to_XML
                     throw new ArgumentException("Incorrect number of arguments");
                 }
 
-                var students = new HashSet<Student>();
+                var uni = new University();
                 foreach (var line in File.ReadAllLines(args[0]))
                 {
                     var split = line.Split(",");
@@ -28,7 +28,8 @@ namespace CSV_to_XML
                         return;
                         // TODO logging, quit
                     }
-                    students.Add(new Student
+                    var studyName = split[2];
+                    uni.AddStudent(new Student
                     {
                         id = $"s{split[4]}",
                         firstName = split[0],
@@ -39,10 +40,10 @@ namespace CSV_to_XML
                         fathersName = split[8],
                         studies = new Study
                         {
-                            name = split[2],
+                            name = studyName,
                             mode = split[3]
                         }
-                    });
+                    }, studyName);
                 }
 
                 using (StreamWriter sw = new StreamWriter(args[1]))
@@ -50,11 +51,11 @@ namespace CSV_to_XML
                     switch (args[2])
                     {
                         case "xml":
-                            XmlSerializer serializer = new XmlSerializer(typeof(HashSet<Student>), new XmlRootAttribute("uczelnia"));
-                            serializer.Serialize(sw, students);
+                            XmlSerializer serializer = new XmlSerializer(typeof(University), new XmlRootAttribute("uczelnia"));
+                            serializer.Serialize(sw, uni);
                             break;
                         case "json":
-                            var json = JsonSerializer.Serialize(students, new JsonSerializerOptions{WriteIndented = true});
+                            var json = JsonSerializer.Serialize(uni, new JsonSerializerOptions{WriteIndented = true});
                             sw.Write(json);
                             break;
                         default:
