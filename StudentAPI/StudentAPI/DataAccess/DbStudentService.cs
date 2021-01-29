@@ -1,10 +1,12 @@
-﻿using StudentAPI.DTO;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using StudentAPI.DTO;
 using StudentAPI.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace StudentAPI.DataAccess
@@ -205,6 +207,86 @@ namespace StudentAPI.DataAccess
                     return false;
                 }
             }
+        }
+
+        public bool LoginAs(string id, string password)
+        {
+            using(var conn = GetConnection())
+            using(var command = new SqlCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    command.Connection = conn;
+                    command.CommandText = "SELECT Password, Salt FROM Student WHERE IndexNumber=@id";
+                    command.Parameters.AddWithValue("id", id);
+                    var reader = command.ExecuteReader();
+                    if(!reader.Read())
+                    {
+                        return false;
+                    }
+                    var hash = reader["Password"].ToString();
+                    var salt = reader["Salt"].ToString();
+                    return CreateHash(password, salt) == hash;
+                }
+                catch(SqlException e)
+                {
+                    return false;
+                }
+            }
+        }
+
+        public string GetRefreshToken(string id)
+        {
+            using (var conn = GetConnection())
+            using (var command = new SqlCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    command.Connection = conn;
+                    command.CommandText = "SELECT RefreshToken FROM Student WHERE IndexNumber=@id";
+                    command.Parameters.AddWithValue("id", id);
+                    return (string)command.ExecuteScalar();
+                }
+                catch (SqlException e)
+                {
+                    return null;
+                }
+            }
+        }
+
+        public void SaveRefreshToken(string id, string token)
+        {
+            using(var conn = GetConnection())
+            using(var command = new SqlCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    command.Connection = conn;
+                    command.CommandText = "UPDATE Student SET RefreshToken=@token WHERE IndexNumber=@id";
+                    command.Parameters.AddWithValue("token", token);
+                    command.Parameters.AddWithValue("id", id);
+                    var reader = command.ExecuteNonQuery();
+                }
+                finally
+                {
+                    ;
+                }
+            }
+        }
+
+        private string CreateHash(string password, string salt)
+        {
+            var bytes = KeyDerivation.Pbkdf2(
+                password: password,
+                salt: Encoding.UTF8.GetBytes(salt),
+                prf: KeyDerivationPrf.HMACSHA512,
+                iterationCount: 10000,
+                numBytesRequested: 32
+            );
+            return Convert.ToBase64String(bytes);
         }
 
         private SqlConnection GetConnection()

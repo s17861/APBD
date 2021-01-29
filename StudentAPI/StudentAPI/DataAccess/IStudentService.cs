@@ -14,5 +14,8 @@ namespace StudentAPI.DataAccess
         EnrollmentResponse EnrollStudent(EnrollmentRequest request);
         PromotionResponse PromoteStudents(PromotionRequest request);
         bool CheckIndexExists(string id);
+        bool LoginAs(string id, string password);
+        string GetRefreshToken(string id);
+        void SaveRefreshToken(string id, string token);
     }
 }
