@@ -14,11 +14,11 @@ namespace StudentAPI.DataAccess
         {
             _students = new List<Student>
             {
-                new Student{Id=0, FirstName="Steve", LastName="Bobs", IndexNumber="s1"},
-                new Student{Id=1, FirstName="John", LastName="Doe", IndexNumber="s3"},
-                new Student{Id=2, FirstName="Stephen", LastName="Hunt", IndexNumber="s151"},
-                new Student{Id=3, FirstName="Bob", LastName="Bobson", IndexNumber="s122"},
-                new Student{Id=4, FirstName="Richard", LastName="Dicks", IndexNumber="s132"}
+                new Student{Id="s0", FirstName="Steve", LastName="Bobs"},
+                new Student{Id="s1", FirstName="John", LastName="Doe"},
+                new Student{Id="s2", FirstName="Stephen", LastName="Hunt"},
+                new Student{Id="s3", FirstName="Bob", LastName="Bobson"},
+                new Student{Id="s4", FirstName="Richard", LastName="Dicks"}
             };
         }
         public IEnumerable<Student> GetAll()
