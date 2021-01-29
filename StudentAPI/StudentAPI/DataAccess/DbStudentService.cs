@@ -175,12 +175,35 @@ namespace StudentAPI.DataAccess
                     }
                     response.IdEnrollment = value;
                 }
-                catch (SqlException e)
+                catch(SqlException e)
                 {
                     response.Message = e.Message;
                     return response;
                 }
                 return response;
+            }
+        }
+
+        public bool CheckIndexExists(string id)
+        {
+            using(var conn = GetConnection())
+            using(var command = new SqlCommand())
+            {
+                try
+                {
+                    conn.Open();
+                    command.Connection = conn;
+                    command.CommandText = "SELECT IndexNumber FROM Student WHERE IndexNumber=@id";
+                    command.Parameters.AddWithValue("id", id);
+                    var temp = (string)command.ExecuteScalar();
+                    return temp != null;
+                    //return (string)command.ExecuteScalar() == null;
+                }
+                catch(SqlException e)
+                {
+                    // Can't validate, let's be cautious;
+                    return false;
+                }
             }
         }
 

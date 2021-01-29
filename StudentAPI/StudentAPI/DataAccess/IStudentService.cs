@@ -9,9 +9,10 @@ namespace StudentAPI.DataAccess
 {
     public interface IStudentService
     {
-        public IEnumerable<Student> GetAll();
-        public Student GetById(string id);
+        IEnumerable<Student> GetAll();
+        Student GetById(string id);
         EnrollmentResponse EnrollStudent(EnrollmentRequest request);
         PromotionResponse PromoteStudents(PromotionRequest request);
+        bool CheckIndexExists(string id);
     }
 }
