@@ -9,6 +9,7 @@ namespace StudentAPI.Model
     {
         public int Id { get; set; }
         public int Semester { get; set; }
+        public int StudyId { get; set; }
         public DateTime StartDate { get; set; }
     }
 }
