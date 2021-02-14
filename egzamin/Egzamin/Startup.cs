@@ -1,3 +1,4 @@
+using Egzamin.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -25,6 +26,7 @@ namespace Egzamin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
+            services.AddSingleton<MyDbContext, MyDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

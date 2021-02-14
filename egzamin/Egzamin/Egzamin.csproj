@@ -7,20 +7,24 @@
   <ItemGroup>
     <Compile Remove="Migrations\20210213224257_App-Init.cs" />
     <Compile Remove="Migrations\20210213224257_App-Init.Designer.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Migrations\" />
+    <Compile Remove="Migrations\20210214122339_Init-App.cs" />
+    <Compile Remove="Migrations\20210214122339_Init-App.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.12" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.12" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.12">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.11" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.11">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 
